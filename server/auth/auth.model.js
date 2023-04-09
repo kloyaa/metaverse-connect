@@ -47,4 +47,21 @@ const UserSchema = new Schema({
     }
 }, { timestamps: true });
 
-module.exports = User = mongoose.model("User", UserSchema);
+const SessionSchema = new Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    value: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+}, { timestamps: true });
+
+
+module.exports = {
+    User: mongoose.model("User", UserSchema),
+    Session: mongoose.model("Session", SessionSchema),
+}
