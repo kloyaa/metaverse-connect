@@ -44,7 +44,11 @@ const UserSchema = new Schema({
     isAccountVerified: {
         type: Boolean,
         default: false,
-    }
+    },
+    isAccountDeactivated: {
+        type: Boolean,
+        default: false,
+    },
 }, { timestamps: true });
 
 const SessionSchema = new Schema({

@@ -15,8 +15,14 @@ const isAccountLocked = async (user) => {
     return result !== null;
 }
 
+const isAccountDeactivated = async (user) => {
+    const result = await User.findOne({ _id: user, isAccountDeactivated: true });
+    return result !== null;
+}
+
 module.exports = {
     saveSession,
     findSessionByUser,
-    isAccountLocked
+    isAccountLocked,
+    isAccountDeactivated
 }

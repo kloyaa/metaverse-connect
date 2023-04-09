@@ -49,6 +49,10 @@ const httpMessage = {
         "code": "10205",
         "message": "Oops! This username is already registered. Please use a different username or log in to your existing account.",
     },
+    "10206": {
+        "code": "10206",
+        "message": "We're sorry, but your account has been temporarily locked due to suspicious login activity. For your protection, we've implemented this security measure. Please wait 10 minutes before attempting to log in again. Thank you for your patience and understanding.",
+    },
     // AUTHENTICATION
     "10301": {
         "code": "10301",

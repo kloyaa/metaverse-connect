@@ -6,7 +6,7 @@ const { User } = require("./auth.model");
 const { httpMessage } = require("../_core/const/http-messages.const");
 const { generateJwt } = require("../_core/utils/jsonwebtoken.util");
 const { encrypt } = require("../_core/utils/encryption.util");
-const { saveSession, findSessionByUser, isAccountLocked } = require("./auth.service");
+const { saveSession, findSessionByUser, isAccountLocked, isAccountDeactivated } = require("./auth.service");
 const { stringToObjectId } = require("../_core/utils/mongodb.util");
 const { jwtAuth } = require("../_core/middleware/jsonwebtoken.middleware");
 
@@ -18,8 +18,16 @@ router.post("/auth/login", async (req, res) => {
             .status(403)
             .json(httpMessage[10301]);
 
-        const isAccLocked = await isAccountLocked(user._id);
+        const [isAccLocked, isAccDeactivated] = await Promise.all([
+            isAccountLocked(user._id),
+            isAccountDeactivated(user._id)
+        ]);
+
         if (isAccLocked) return res
+            .status(403)
+            .json(httpMessage[10206]);
+
+        if (isAccDeactivated) return res
             .status(403)
             .json(httpMessage[10202]);
 
