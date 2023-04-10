@@ -9,19 +9,25 @@ const { encrypt } = require("../_core/utils/encryption.util");
 const { saveSession, findSessionByUser, isAccountLocked, isAccountDeactivated } = require("./auth.service");
 const { stringToObjectId } = require("../_core/utils/mongodb.util");
 const { jwtAuth } = require("../_core/middleware/jsonwebtoken.middleware");
+const { isIPABlacklisted } = require("../blacklist/blacklist.service");
 
 router.post("/auth/login", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, device } = req.body;
         const user = await User.findOne({ username });
         if (!user) return res
             .status(403)
             .json(httpMessage[10301]);
 
-        const [isAccLocked, isAccDeactivated] = await Promise.all([
+        const [isAccLocked, isAccDeactivated, isIPBlackisted] = await Promise.all([
             isAccountLocked(user._id),
-            isAccountDeactivated(user._id)
+            isAccountDeactivated(user._id),
+            isIPABlacklisted(device.ip)
         ]);
+
+        if (isIPBlackisted) return res
+            .status(403)
+            .json(httpMessage[10207]);
 
         if (isAccLocked) return res
             .status(403)

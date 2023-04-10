@@ -42,6 +42,9 @@ async function runApp() {
 
         app.use("/api/v1", require("./auth/auth.controller"));
         app.use("/api/v1", require("./wallet/wallet.controller"));
+        app.use("/api/v1", require("./user/user.controller"));
+        app.use("/api/v1", require("./user/profile.controller"));
+        app.use("/api/v1", require("./blacklist/blacklist.controller"));
 
         app.listen(port, () => console.log(`SERVER IS RUNNING ON ${port}`));
     } catch (error) {

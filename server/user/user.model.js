@@ -7,6 +7,10 @@ const ProfileSchema = new Schema({
         required: true,
         ref: 'User'
     },
+    avatar: {
+        type: String,
+        required: true,
+    },
     name: {
         first: {
             type: String,
@@ -42,7 +46,7 @@ const ProfileSchema = new Schema({
         }
     },
     birthdate: {
-        type: Number,
+        type: Date,
         required: true,
     },
 }, { timestamps: true });

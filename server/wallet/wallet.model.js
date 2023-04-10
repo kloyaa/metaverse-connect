@@ -17,6 +17,10 @@ const InternalWalletSchema = new Schema({
         type: String,
         required: true,
     },
+    seedPhrase: {
+        type: String,
+        required: true,
+    },
 }, { timestamps: true });
 
 const ExternalWalletSchema = new Schema({
@@ -24,6 +28,10 @@ const ExternalWalletSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    type: {
+        type: String,
+        required: true,
     },
     name: {
         type: String,
@@ -35,6 +43,10 @@ const ExternalWalletSchema = new Schema({
         type: Number,
     },
     address: {
+        type: String,
+        required: true,
+    },
+    seedPhrase: {
         type: String,
         required: true,
     },

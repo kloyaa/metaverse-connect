@@ -53,6 +53,10 @@ const httpMessage = {
         "code": "10206",
         "message": "We're sorry, but your account has been temporarily locked due to suspicious login activity. For your protection, we've implemented this security measure. Please wait 10 minutes before attempting to log in again. Thank you for your patience and understanding.",
     },
+    "10207": {
+        "code": "10207",
+        "message": "We're sorry, your connection has been temporarily blocked due to suspicious login attempts or violations, please wait for 10 minutes before attempting to access the platform again.",
+    },
     // AUTHENTICATION
     "10301": {
         "code": "10301",
